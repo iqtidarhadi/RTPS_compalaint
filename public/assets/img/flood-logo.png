@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
+  <!-- Background -->
+  <rect width="160" height="40" fill="white" rx="5"/>
+  
+  <!-- Water waves -->
+  <path d="M0,32 Q8,28 16,32 T32,32 T48,32 T64,32 T80,32 T96,32 T112,32 T128,32 T144,32 T160,32 L160,40 L0,40 Z" fill="#1976d2"/>
+  <path d="M0,28 Q12,24 24,28 T48,28 T72,28 T96,28 T120,28 T144,28 T160,28 L160,40 L0,40 Z" fill="#2196f3" opacity="0.8"/>
+  <path d="M0,24 Q16,20 32,24 T64,24 T96,24 T128,24 T160,24 L160,40 L0,40 Z" fill="#42a5f5" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="8" y="12" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#1976d2">
+    FLOOD ADVANCE
+  </text>
+  <text x="8" y="20" font-family="Arial, sans-serif" font-size="6" fill="#1976d2">
+    REPORT SYSTEM
+  </text>
+  
+  <!-- Warning icon -->
+  <circle cx="140" cy="10" r="6" fill="#ff9800"/>
+  <path d="M137,7 L143,7 L140,13 Z" fill="white"/>
+  <circle cx="140" cy="14" r="0.8" fill="white"/>
+</svg>
