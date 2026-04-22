@@ -130,3 +130,51 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(16, 148, 90, 0.5) !important; /* Green glow */
     outline: none !important;
 }
+
+/* Force desktop-style sidebar on medium laptop screens.
+   The vendor template switches to overlay mode below 1200px, which blocks
+   the page with a dark layer on common laptop widths like 1024px. */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .layout-menu {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: translate3d(0, 0, 0) !important;
+        z-index: 1100 !important;
+    }
+
+    [dir="rtl"] .layout-menu {
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    .layout-page {
+        padding-left: 16.25rem !important;
+    }
+
+    [dir="rtl"] .layout-page {
+        padding-right: 16.25rem !important;
+        padding-left: 0 !important;
+    }
+
+    html.layout-menu-expanded body {
+        overflow: auto !important;
+    }
+
+    .layout-overlay,
+    .content-backdrop,
+    .content-backdrop.show,
+    .content-backdrop.fade {
+        display: none !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+    }
+
+    .layout-navbar .layout-menu-toggle,
+    .drag-target {
+        display: none !important;
+    }
+}

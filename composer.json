@@ -13,6 +13,7 @@
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "nwidart/laravel-modules": "^12.0",
         "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-permission": "^6.16",
         "yajra/laravel-datatables-oracle": "^11.1"
@@ -30,6 +31,19 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\Complaint\\Enums\\": "Modules/Complaint/app/Enums/",
+            "Modules\\Complaint\\Http\\": "Modules/Complaint/Http/",
+            "Modules\\Complaint\\Models\\": [
+                "Modules/Complaint/app/Models/",
+                "Modules/Complaint/Models/"
+            ],
+            "Modules\\Complaint\\Policies\\": "Modules/Complaint/app/Policies/",
+            "Modules\\Complaint\\Providers\\": "Modules/Complaint/app/Providers/",
+            "Modules\\Complaint\\Services\\": "Modules/Complaint/app/Services/",
+            "Modules\\Complaint\\Events\\": "Modules/Complaint/Events/",
+            "Modules\\Complaint\\View\\Components\\": "Modules/Complaint/View/Components/",
+            "Modules\\Complaint\\Database\\Factories\\": "Modules/Complaint/database/factories/",
+            "Modules\\Complaint\\Database\\Seeders\\": "Modules/Complaint/database/seeders/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
@@ -74,7 +88,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "minimum-stability": "stable",
