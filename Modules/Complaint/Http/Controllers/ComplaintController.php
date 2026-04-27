@@ -11,9 +11,10 @@ use Modules\Complaint\Models\Department;
 use Modules\Complaint\Services\ComplaintDashboardService;
 use Modules\Complaint\Services\ComplaintListingService;
 use Modules\Complaint\Services\ComplaintWorkflowService;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class ComplaintController extends Controller
 {
+    use AuthorizesRequests;
     public function __construct(
         protected ComplaintListingService $listingService,
         protected ComplaintWorkflowService $workflowService,

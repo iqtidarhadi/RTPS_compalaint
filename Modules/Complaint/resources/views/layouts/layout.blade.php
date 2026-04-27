@@ -24,7 +24,15 @@
         }
 
         .app-content {
-            padding: 1.5rem;
+            padding: 1rem;
+            padding-bottom: 5rem;
+        }
+
+        @media (min-width: 992px) {
+            .app-content {
+                padding: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
         }
 
         .topbar-card,
@@ -36,24 +44,177 @@
         }
 
         .topbar-card {
-            padding: 1rem 1.25rem;
+            padding: 1rem;
             margin-bottom: 1rem;
         }
 
         .content-card {
-            padding: 1.25rem;
+            padding: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .topbar-card {
+                padding: 1rem 1.25rem;
+            }
+            .content-card {
+                padding: 1.25rem;
+            }
         }
 
         .page-title {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0;
         }
 
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 1.4rem;
+            }
+        }
+
         .page-subtitle {
             color: #6b7280;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            .page-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 991.98px) {
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Ensure content is visible above mobile nav */
+        .content-wrapper {
+            padding-bottom: 4rem;
+        }
+
+        /* Sidebar collapse styles */
+        #sidebar {
+            width: 16.666667% !important;
+            max-width: 220px;
+            min-width: 220px;
+            transition: all 0.3s ease;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        #sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #c7d2e2;
+            border-radius: 999px;
+        }
+
+        #sidebar.collapsed {
+            width: 40px !important;
+            max-width: 40px;
+            min-width: 40px;
+        }
+
+        #sidebar.collapsed .sidebar-text {
+            display: none;
+        }
+
+        #sidebar.collapsed .sidebar-icon {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #sidebar .sidebar-icon {
+            display: none !important;
+        }
+
+        #sidebar.collapsed .sidebar-header a {
+            justify-content: center;
+        }
+
+        #sidebar.collapsed .nav-link {
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+            padding: 0;
+            gap: 0 !important;
+        }
+
+        #sidebar.collapsed .sidebar-header {
+            padding: 0.25rem;
+            text-align: center;
+        }
+
+        #sidebar.collapsed .nav-link i {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        #sidebar.collapsed #toggleIcon {
+            transform: rotate(180deg);
+        }
+
+        #sidebar.collapsed .p-3 {
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
+        }
+
+        #sidebar.collapsed .sidebar-header .sidebar-icon {
+            width: 30px !important;
+            height: 30px !important;
+            font-size: 0.75rem;
+        }
+
+        .main-content {
+            transition: margin-left 0.3s ease, width 0.3s ease;
+            margin-left: 16.666667%;
+            width: 83.333333%;
+        }
+
+        .main-content.expanded {
+            margin-left: 0 !important;
+            width: 100%;
+        }
+
+        /* Hide navigation label when collapsed */
+        #sidebar.collapsed .text-uppercase {
+            display: none;
+        }
+
+        /* Adjust main content for collapsed sidebar */
+        @media (min-width: 992px) {
+            .main-content.expanded {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+        }
+
+        /* Compact table styles */
+        .table-sm th, .table-sm td {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .badge-sm {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+        }
+
+        /* Sticky table header */
+        .sticky-top {
+            top: 0;
+            z-index: 10;
         }
     </style>
     @stack('stylesheets')
@@ -63,8 +224,8 @@
         <div class="row">
             @include('complaint::layouts.sidebar')
 
-            <main class="col-lg-10 ms-sm-auto px-0">
-                <div class="app-content">
+            <main class="px-0 main-content">
+                <div class="app-content content-wrapper">
                     <div class="topbar-card d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                         <div>
                             <h1 class="page-title">{{ $title ?? 'Complaint Workflow' }}</h1>
@@ -72,7 +233,7 @@
                         </div>
 
                         @auth
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-none d-lg-flex align-items-center gap-3">
                                 <div class="text-end">
                                     <div class="fw-semibold">{{ trim((auth()->user()->firstname ?? '') . ' ' . (auth()->user()->lastname ?? '')) ?: (auth()->user()->name ?? auth()->user()->email) }}</div>
                                     <div class="text-muted small">{{ auth()->user()->role }}</div>
@@ -110,6 +271,33 @@
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const mainContent = document.querySelector('.main-content');
+            
+            // Check localStorage for sidebar state
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            }
+            
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+                
+                // Save state to localStorage
+                const isNowCollapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('sidebarCollapsed', isNowCollapsed);
+            });
+        });
+    </script>
+    
     @stack('scripts')
 </body>
 </html>

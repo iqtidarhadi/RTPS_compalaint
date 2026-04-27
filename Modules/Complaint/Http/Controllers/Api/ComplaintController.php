@@ -4,6 +4,7 @@ namespace Modules\Complaint\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\Complaint\Http\Requests\StoreAppealRequest;
 use Modules\Complaint\Http\Requests\StoreComplaintRequest;
 use Modules\Complaint\Models\Complaint;
@@ -219,7 +220,7 @@ class ComplaintController extends Controller
             'period' => $period,
             'total_changes' => $query->count(),
             'avg_time_per_status' => [],
-            'most_active_officers' => ComplaintStatusHistory::select('changed_by_name', \DB::raw('COUNT(*) as changes'))
+            'most_active_officers' => ComplaintStatusHistory::select('changed_by_name', DB::raw('COUNT(*) as changes'))
                 ->groupBy('changed_by_name', 'changed_by')
                 ->orderBy('changes', 'desc')
                 ->limit(10)

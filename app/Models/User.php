@@ -12,14 +12,13 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
 
-    use HasFactory, HasApiTokens, Notifiable, HasRoles, LogsActivity, SoftDeletes;
+    use HasFactory, HasApiTokens, Notifiable, HasRoles, LogsActivity;
 
     public function getActivitylogOptions(): LogOptions
     {

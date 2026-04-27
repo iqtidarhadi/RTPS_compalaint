@@ -2,6 +2,7 @@
 
 use Modules\Complaint\Http\Controllers\ComplaintController;
 use Modules\Complaint\Http\Controllers\ProfileController;
+use Modules\Complaint\Http\Controllers\RtsServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -14,6 +15,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/{complaint}', [ComplaintController::class, 'show'])->name('show');
         Route::post('/{complaint}/status-update', [ComplaintController::class, 'statusUpdate'])
             ->name('status-update');
+    });
+
+    // Keep citizen create route available for sidebar links.
+    Route::prefix('citizen')->name('citizen.')->group(function () {
+        Route::get('/complaints/create', fn () => redirect()->route('complaints.index'))
+            ->name('complaints.create');
+    });
+
+    // RTS services pages
+    Route::prefix('rts/services')->name('rts.services.')->group(function () {
+        Route::get('/', [RtsServiceController::class, 'index'])->name('index');
+        Route::get('/department/{id}', [RtsServiceController::class, 'showDepartment'])->name('department');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
