@@ -26,7 +26,9 @@ Route::middleware('auth')->group(function () {
     // RTS services pages
     Route::prefix('rts/services')->name('rts.services.')->group(function () {
         Route::get('/', [RtsServiceController::class, 'index'])->name('index');
+        Route::get('/statistics', [RtsServiceController::class, 'statistics'])->name('statistics');
         Route::get('/department/{id}', [RtsServiceController::class, 'showDepartment'])->name('department');
+         Route::get('/department/user/{id}', [RtsServiceController::class, 'department_user'])->name('department_user');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

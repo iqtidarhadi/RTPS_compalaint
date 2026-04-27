@@ -24,4 +24,15 @@ class RtsServiceController extends Controller
             ->get();
         return view('complaint::rts_services.department', compact('department', 'services'));
     }
+
+    public function statistics()
+    {
+        return view('complaint::rts_services.statistics');
+    }
+    public function department_user($id)
+    {
+        // $department = Department::findOrFail($id);
+        // $users = $department->users()->where('is_active', true)->get();
+        return view('complaint::rts_services.department_user');
+    }
 }

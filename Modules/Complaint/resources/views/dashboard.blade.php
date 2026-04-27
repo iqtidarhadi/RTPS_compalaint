@@ -190,53 +190,49 @@
             </div>
         </div>
 
-        <div class="border rounded-4 p-3">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-2">
+        <div class="border rounded-4 p-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
                 <div>
-                    <h6 class="mb-1">Recent Complaints</h6>
+                    <h5 class="mb-1">Recent Complaints</h5>
                     <div class="text-muted small">Latest complaints visible to the current logged-in role.</div>
                 </div>
                 <a href="{{ route('complaints.index') }}" class="btn btn-outline-primary btn-sm">View All</a>
             </div>
 
-            <div style="max-height: 300px; overflow-y: auto;">
-                <table class="table table-sm align-middle mb-0">
-                    <thead class="table-light sticky-top">
-                        <tr class="small">
-                            <th class="py-2">Tracking #</th>
-                            <th class="py-2">Citizen</th>
-                            <th class="py-2">Department</th>
-                            <th class="py-2">Status</th>
-                            <th class="py-2">Stage</th>
-                            <th class="py-2">Submitted</th>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tracking #</th>
+                            <th>Citizen</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Stage</th>
+                            <th>Submitted</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($recentComplaints->take(8) as $complaint)
+                        @forelse($recentComplaints as $complaint)
                             @php $statusEnum = $statusMap[$complaint->status] ?? null; @endphp
-                            <tr class="small">
-                                <td class="py-1">
-                                    <a href="{{ route('complaints.show', $complaint) }}" class="fw-semibold text-decoration-none small">
+                            <tr>
+                                <td>
+                                    <a href="{{ route('complaints.show', $complaint) }}" class="fw-semibold text-decoration-none">
                                         {{ $complaint->tracking_number }}
                                     </a>
                                 </td>
-                                <td class="py-1 text-truncate" style="max-width: 120px;" title="{{ $complaint->complainant->name ?? ($complaint->citizen->name ?? 'N/A') }}">
-                                    {{ $complaint->complainant->name ?? ($complaint->citizen->name ?? 'N/A') }}
-                                </td>
-                                <td class="py-1 text-truncate" style="max-width: 100px;" title="{{ $complaint->department->name ?? 'N/A' }}">
-                                    {{ $complaint->department->name ?? 'N/A' }}
-                                </td>
-                                <td class="py-1">
-                                    <span class="badge rounded-pill badge-sm {{ $statusEnum?->badgeClass() ?? 'bg-secondary-subtle text-secondary' }}">
+                                <td>{{ $complaint->complainant->name ?? ($complaint->citizen->name ?? 'N/A') }}</td>
+                                <td>{{ $complaint->department->name ?? 'N/A' }}</td>
+                                <td>
+                                    <span class="badge rounded-pill {{ $statusEnum?->badgeClass() ?? 'bg-secondary-subtle text-secondary' }}">
                                         {{ $statusEnum?->label() ?? \Illuminate\Support\Str::headline($complaint->status) }}
                                     </span>
                                 </td>
-                                <td class="py-1 small">{{ $complaint->stageLabel() }}</td>
-                                <td class="py-1 small">{{ optional($complaint->submitted_at ?? $complaint->created_at)->format('d M Y') }}</td>
+                                <td>{{ $complaint->stageLabel() }}</td>
+                                <td>{{ optional($complaint->submitted_at ?? $complaint->created_at)->format('d M Y') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-muted py-3 small">No complaints available for the current role scope.</td>
+                                <td colspan="6" class="text-center text-muted py-4">No complaints available for the current role scope.</td>
                             </tr>
                         @endforelse
                     </tbody>

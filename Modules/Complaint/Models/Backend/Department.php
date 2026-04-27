@@ -2,10 +2,11 @@
 
 namespace Modules\Complaint\Models\Backend;
 
-use App\Models\Complaint;
+use Modules\Complaint\Models\Complaint;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Complaint\Models\Complaint as ModelsComplaint;
 
 class Department extends Model
 {

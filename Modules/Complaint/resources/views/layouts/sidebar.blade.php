@@ -66,10 +66,29 @@
             @endforeach
 
             @if($isRts)
-                <a href="{{ route('rts.services.index') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.index' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}">
+                @php
+                    $isRtsNavActive = in_array($currentRoute, ['rts.services.index', 'rts.services.statistics', 'rts.services.department']);
+                @endphp
+                <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $isRtsNavActive ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}"
+                   data-bs-toggle="collapse"
+                   href="#rtsServicesMenu"
+                   role="button"
+                   aria-expanded="{{ $isRtsNavActive ? 'true' : 'false' }}"
+                   aria-controls="rtsServicesMenu">
                     <i class="bx bx-list-ul flex-shrink-0"></i>
-                    <span class="sidebar-text">Services</span>
+                    <span class="sidebar-text">RTS Services</span>
+                    <i class="bx bx-chevron-down ms-auto"></i>
                 </a>
+                <div class="collapse ms-3 {{ $isRtsNavActive ? 'show' : '' }}" id="rtsServicesMenu">
+                    <a href="{{ route('rts.services.index') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.index' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}">
+                        <i class="bx bx-right-arrow-alt"></i>
+                        <span class="sidebar-text">Services</span>
+                    </a>
+                    <a href="{{ route('rts.services.statistics') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.statistics' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}">
+                        <i class="bx bx-stats"></i>
+                        <span class="sidebar-text">Statistics</span>
+                    </a>
+                </div>
             @endif
         </div>
     </div>
@@ -143,10 +162,30 @@
             @endforeach
 
             @if($isRts)
-                <a href="{{ route('rts.services.index') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.index' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}" data-bs-dismiss="offcanvas">
+                @php
+                    $isRtsNavActive = in_array($currentRoute, ['rts.services.index', 'rts.services.statistics', 'rts.services.department']);
+                @endphp
+                <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $isRtsNavActive ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}"
+                   data-bs-toggle="collapse"
+                   href="#mobileRtsServicesMenu"
+                   role="button"
+                   aria-expanded="{{ $isRtsNavActive ? 'true' : 'false' }}"
+                   aria-controls="mobileRtsServicesMenu"
+                   data-bs-dismiss="offcanvas">
                     <i class="bx bx-list-ul"></i>
-                    <span>Services</span>
+                    <span>RTS Services</span>
+                    <i class="bx bx-chevron-down ms-auto"></i>
                 </a>
+                <div class="collapse ms-3 {{ $isRtsNavActive ? 'show' : '' }}" id="mobileRtsServicesMenu">
+                    <a href="{{ route('rts.services.index') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.index' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}" data-bs-dismiss="offcanvas">
+                        <i class="bx bx-right-arrow-alt"></i>
+                        <span>Services</span>
+                    </a>
+                    <a href="{{ route('rts.services.statistics') }}" class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 {{ $currentRoute === 'rts.services.statistics' ? 'active bg-primary text-white' : 'text-dark bg-light-subtle' }}" data-bs-dismiss="offcanvas">
+                        <i class="bx bx-stats"></i>
+                        <span>Statistics</span>
+                    </a>
+                </div>
             @endif
         </div>
 

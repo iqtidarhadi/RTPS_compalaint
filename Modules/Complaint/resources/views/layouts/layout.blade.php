@@ -200,22 +200,6 @@
                 width: 100%;
             }
         }
-
-        /* Compact table styles */
-        .table-sm th, .table-sm td {
-            padding: 0.25rem 0.5rem;
-        }
-
-        .badge-sm {
-            font-size: 0.7rem;
-            padding: 0.2rem 0.4rem;
-        }
-
-        /* Sticky table header */
-        .sticky-top {
-            top: 0;
-            z-index: 10;
-        }
     </style>
     @stack('stylesheets')
 </head>

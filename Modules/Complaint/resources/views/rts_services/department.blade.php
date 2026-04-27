@@ -80,7 +80,7 @@
                         <td>12 Jan 2026</td>
                         <td>Shaukat Khan DC-Office</td>
                         <td><span class="badge bg-danger">Dependency</span></td>
-                        <td>...</td>
+                        <td><a href="{{ route('rts.services.department_user', $department->id) }}" class="btn btn-sm btn-primary">View Details</a></td>
                     </tr>
                     <tr>
                         <td>Jawad Khan</td>
