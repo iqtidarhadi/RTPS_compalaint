@@ -301,8 +301,11 @@
 </head>
 <body>
 
-<div class="page-title">Arms License - Service Delivery Details</div>
-<div class="app-id">Application ID: 123456</div>
+<div class="page-title">{{ $service['title'] ?? 'Service' }} - Service Delivery Details</div>
+<div class="app-id">Application ID: RTS-{{ str_pad((string) ($service['id'] ?? 0), 6, '0', STR_PAD_LEFT) }}</div>
+<div style="margin-bottom: 12px;">
+  <a href="{{ route('rts.services.department', $service['id'] ?? 0) }}">&larr; Back to {{ $service['title'] ?? 'Service' }}</a>
+</div>
 
 <div class="layout">
   <!-- LEFT MAIN COLUMN -->

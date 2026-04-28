@@ -119,9 +119,9 @@
         }
 
         #sidebar.collapsed {
-            width: 40px !important;
-            max-width: 40px;
-            min-width: 40px;
+            width: 47px !important;
+            max-width: 61px;
+            min-width: 57px;
         }
 
         #sidebar.collapsed .sidebar-text {
